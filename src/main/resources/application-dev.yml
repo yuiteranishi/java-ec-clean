@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:ecdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      jakarta.persistence.sql-load-script-source: import.sql
+      hibernate.hbm2ddl.import_files_sql_extractor: org.hibernate.tool.schema.internal.script.MultiLineSqlScriptExtractor
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  messages:
+    basename: messages
+    encoding: UTF-8
+  mail:
+    host: smtp.mailtrap.io
+    port: 2525
+    username: 75caa155932608
+    password: 9db2426d65046e
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: 8080
+  messages:
+    basename: messages
+    encoding: UTF-8

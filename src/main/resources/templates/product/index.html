@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja" th:with="pageTitle=${'Product List'}">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${pageTitle}">Product List</title>
+</head>
+<body th:replace="~{_layout/base :: layout(~{::section})}">
+<section>
+    <h1>Product List</h1>
+    <!-- カテゴリ -->
+    <form method="get" action="#" style="margin:12px 0">
+        <label>Category:
+            <select name="category" onchange="this.form.submit()">
+                <option th:value="''" th:selected="${selectedCategory == null or selectedCategory == ''}">All</option>
+                <option th:each="c : ${categories}"
+                        th:value="${c.slug}"
+                        th:text="${c.name}"
+                        th:selected="${selectedCategory == c.slug}"></option>
+            </select>
+        </label>
+        <noscript><button type="submit">Filter</button></noscript>
+    </form>
+    <!-- 商品一覧 -->
+    <table>
+        <thead>
+        <tr><th>Image</th><th>ID</th><th>Name</th><th>Price</th><th></th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${products}">
+            <td>
+                <img th:src="${p.imageUrl} ?: @{/images/noimage.png}"
+                     th:alt="${p.name}"
+                     style="width:80px;height:80px;object-fit:cover;border:1px solid #ddd;border-radius:6px"/>
+            </td>
+            <td th:text="${p.id}">1</td>
+            <td th:text="${p.name}">Sample</td>
+            <td th:text="${p.priceText}">¥1,200</td>
+            <td><a th:href="@{|/products/${p.id}|}">Detail</a></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>

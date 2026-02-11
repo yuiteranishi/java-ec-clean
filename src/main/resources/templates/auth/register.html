@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      lang="ja" th:with="pageTitle='Register'">
+<head><meta charset="UTF-8"/><title th:text="${pageTitle}">Register</title></head>
+<body th:replace="~{_layout/base :: layout(~{::section})}">
+<section>
+    <h1>Create account</h1>
+    <!-- フォーム本体 #fields を使うため必ず th:object の内側にエラー表示を置く -->
+    <form method="post" th:object="${form}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <!-- フォーム全体（グローバル）エラー表示（@PasswordMatches など） -->
+        <div th:if="${#fields.hasGlobalErrors()}" style="color:#c00">
+            <ul>
+                <li th:each="e:${#fields.globalErrors()}" th:text="${e}">errors</li>
+            </ul>
+        </div>
+        <!-- Email -->
+        <div><label>Email <input type="email" th:field="*{email}" required></label></div>
+        <div th:if="${#fields.hasErrors('email')}" style="color:#c00" th:errors="*{email}">dn err</div>
+        <!-- Display Name -->
+        <div><label>Display Name <input type="text" th:field="*{displayName}" required></label>
+            <div th:if="${#fields.hasErrors('displayName')}" style="color:#c00" th:errors="*{displayName}">dn err</div>
+        </div>
+        <!-- Password -->
+        <div><label>Password <input type="password" th:field="*{password}" required></label>
+            <div th:if="${#fields.hasErrors('password')}" style="color:#c00" th:errors="*{password}">pw err</div>
+        </div>
+        <!-- Confirm Password -->
+        <div><label>Confirm Password <input type="password" th:field="*{confirmPassword}" required></label>
+              <div th:if="${#fields.hasErrors('confirmPassword')}" style="color:#c00" th:errors="*{confirmPassword}">cpw err</div>
+        </div>
+        <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a th:href="@{/login}">Login</a></p>
+</section>
+</body>
+</html>

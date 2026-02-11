@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<body>
+<div th:fragment="footer" style="padding:8px;border-top:1px solid #ddd;margin-top:24px">
+    &copy; <span th:text="${#temporals.format(#temporals.createNow(),'yyyy')}">2025</span> My EC
+</div>
+</body>
+</html>

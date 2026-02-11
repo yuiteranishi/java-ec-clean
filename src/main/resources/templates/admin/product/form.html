@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja"
+      th:with="pageTitle=${form.id} != null ? 'Edit Product' : 'New Product'">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${pageTitle}">Product Form</title>
+</head>
+<body th:replace="~{_layout/base :: layout(~{::section})}">
+<section>
+    <h1 th:text="${pageTitle}">Product Form</h1>
+
+    <!-- form は AdminProductForm（record）。th:object でバインド -->
+    <form method="post" th:object="${form}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+        <!-- グローバルエラー（@AssertTrue 等やクロス項目のエラーがある場合） -->
+        <div th:if="${#fields.hasGlobalErrors()}" style="color:#c00; margin-bottom:8px;">
+            <ul>
+                <li th:each="e : ${#fields.globalErrors()}" th:text="${e}">global error</li>
+            </ul>
+        </div>
+
+        <div style="margin-bottom:10px;">
+            <label for="name">Name</label><br/>
+            <input id="name" type="text" th:field="*{name}" required maxlength="255" style="width: 360px;"/>
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:#c00;">name err</div>
+        </div>
+
+        <div style="margin-bottom:10px;">
+            <label for="price">Price</label><br/>
+            <input id="price" type="number" th:field="*{price}" step="0.01" min="0.01" style="width: 180px;" required/>
+            <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" style="color:#c00;">price err</div>
+        </div>
+
+        <div style="margin-bottom:10px;">
+            <label for="stockQty">Stock</label><br/>
+            <input id="stockQty" type="number" th:field="*{stockQty}" min="0" style="width: 120px;" required/>
+            <div th:if="${#fields.hasErrors('stockQty')}" th:errors="*{stockQty}" style="color:#c00;">stock err</div>
+        </div>
+
+        <div style="margin-bottom:10px;">
+            <label for="imageUrl">Image URL</label><br/>
+            <input id="imageUrl" type="url" th:field="*{imageUrl}" maxlength="1024" placeholder="/images/coffee.jpg" style="width: 360px;"/>
+            <div th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" style="color:#c00;">url err</div>
+        </div>
+
+        <div style="margin-bottom:10px;">
+            <label for="category">Category</label><br/>
+            <select id="category" th:field="*{category}" style="width: 240px;">
+                <option th:value="${null}">-- none --</option>
+                <!-- categories は Controller 側で可視カテゴリを投入 -->
+                <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"></option>
+            </select>
+            <div th:if="${#fields.hasErrors('category')}" th:errors="*{category}" style="color:#c00;">cat err</div>
+        </div>
+
+        <div style="margin-bottom:10px;">
+            <label for="description">Description</label><br/>
+            <textarea id="description" th:field="*{description}" rows="5" cols="60" maxlength="1000"></textarea>
+            <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" style="color:#c00;">desc err</div>
+        </div>
+
+        <div style="margin-top:14px;">
+            <button type="submit" th:text="${form.id} != null ? 'Update' : 'Create'">Create</button>
+            &nbsp;&nbsp;
+            <a th:href="@{/admin/products}">Back</a>
+        </div>
+    </form>
+</section>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja"
+      th:with="pageTitle=|Product #${product.id}|">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${pageTitle}">Product Detail</title>
+</head>
+<body th:replace="~{_layout/base :: layout(~{::section})}">
+<section>
+    <h1 th:text="${product.name}">Product Name</h1>
+    <div style="margin:12px 0">
+        <img th:src="${product.imageUrl} ?: @{/images/noimage.png}"
+             th:alt="${product.name}"
+             style="max-width:360px;max-height:360px;width:auto;height:auto;border:1px solid #ddd;border-radius:8px"/>
+    </div>
+    <p><b>Category:</b>
+        <a th:if="${product.categorySlug != null}"
+           th:href="@{|/products?category=${product.categorySlug}|}"
+           th:text="${product.categoryName}">Category</a>
+        <span th:unless="${product.categorySlug != null}">—</span>
+    </p>
+    <p><b>価格:</b> <span th:text="${product.priceText}">¥1,200</span></p>
+    <p><b>商品説明:</b></p>
+    <p th:text="${product.description}">description...</p>
+    <p><a th:href="@{/products}">商品一覧へ戻る</a></p>
+</section>
+</body>
+</html>
