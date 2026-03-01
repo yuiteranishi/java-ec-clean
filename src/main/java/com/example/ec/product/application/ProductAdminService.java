@@ -2,11 +2,10 @@ package com.example.ec.product.application;
 
 import com.example.ec.category.domain.Category;
 import com.example.ec.category.repository.CategoryRepository;
-import com.example.ec.product.application.AdminProductUseCase;
 import com.example.ec.product.domain.Product;
 import com.example.ec.product.repository.ProductRepository;
-import com.example.ec.product.form.AdminProductForm;
-import com.example.ec.product.web.dto.AdminProductSummaryView;
+import com.example.ec.product.dto.AdminProductForm;
+import com.example.ec.product.dto.AdminProductSummaryDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,12 +29,12 @@ public class ProductAdminService implements AdminProductUseCase {
 
     @Override
     @Transactional(readOnly = true)
-    public List<AdminProductSummaryView> listAll() {
+    public List<AdminProductSummaryDto> listAll() {
         return productRepo.findAll().stream()
                 // .map() はStream APIのメソッドなので単体では使えない → Stream に変換
                 // Listなどのコレクションはデータの入れ物。Streamはデータを流して処理する仕組み
                 // 1件ずつ商品を表示用に変換（必要な項目に絞り込み）
-                .map(p -> new AdminProductSummaryView(
+                .map(p -> new AdminProductSummaryDto(
                         p.getId(),
                         p.getName(),
                         p.getPrice(),
@@ -94,6 +93,12 @@ public class ProductAdminService implements AdminProductUseCase {
         var p = productRepo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Product not found: " + id));
         productRepo.delete(p);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Category> listVisibleCategories() {
+        return categoryRepo.findAllByIsVisibleTrueOrderBySortOrderAscNameAsc();
     }
 
     private void applyFormToEntity(AdminProductForm f, Product p) {

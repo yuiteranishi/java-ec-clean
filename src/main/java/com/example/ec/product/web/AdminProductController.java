@@ -1,8 +1,7 @@
 package com.example.ec.product.web;
 
-import com.example.ec.category.repository.CategoryRepository;
 import com.example.ec.product.application.AdminProductUseCase;
-import com.example.ec.product.form.AdminProductForm;
+import com.example.ec.product.dto.AdminProductForm;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +12,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admin/products")
 public class AdminProductController {
     private final AdminProductUseCase useCase;
-    private final CategoryRepository categoryRepo;
 
-    public AdminProductController (AdminProductUseCase useCase, CategoryRepository categoryRepo) {
+    public AdminProductController (AdminProductUseCase useCase) {
         this.useCase = useCase;
-        this.categoryRepo = categoryRepo;
     }
 
     @GetMapping
@@ -29,14 +26,14 @@ public class AdminProductController {
     @GetMapping("/new")
     public String createForm(Model model) {
         model.addAttribute("form", useCase.newForm());
-        model.addAttribute("categories", categoryRepo.findAllByIsVisibleTrueOrderBySortOrderAscNameAsc());
+        model.addAttribute("categories", useCase.listVisibleCategories());
         return "admin/product/form";
     }
 
     @PostMapping("/new")
     public String create(@Valid @ModelAttribute("form") AdminProductForm form, BindingResult br, Model model) {
         if (br.hasErrors()) {
-            model.addAttribute("categories", categoryRepo.findAllByIsVisibleTrueOrderBySortOrderAscNameAsc());
+            model.addAttribute("categories", useCase.listVisibleCategories());
         return  "admin/product/form";
         }
         Long id = useCase.create(form);
@@ -46,7 +43,7 @@ public class AdminProductController {
     @GetMapping("/{id}/edit")
     public String editForm(@PathVariable Long id, Model model) {
         model.addAttribute("form", useCase.loadForm(id));
-        model.addAttribute("categories", categoryRepo.findAllByIsVisibleTrueOrderBySortOrderAscNameAsc());
+        model.addAttribute("categories", useCase.listVisibleCategories());
         return "admin/product/form";
     }
 
@@ -55,7 +52,7 @@ public class AdminProductController {
                          @Valid @ModelAttribute AdminProductForm form,
                          BindingResult br, Model model) {
         if (br.hasErrors()) {
-            model.addAttribute("categories", categoryRepo.findAllByIsVisibleTrueOrderBySortOrderAscNameAsc());
+            model.addAttribute("categories", useCase.listVisibleCategories());
             return "admin/product/form";
         }
         useCase.update(id, form);

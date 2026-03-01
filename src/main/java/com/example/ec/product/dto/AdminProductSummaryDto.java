@@ -1,11 +1,11 @@
-package com.example.ec.product.web.dto;
+package com.example.ec.product.dto;
 
 import java.math.BigDecimal;
 
-public record AdminProductSummaryView(
+public record AdminProductSummaryDto (
         Long id,
         String name,
         BigDecimal price,
         Integer stockQty,
         String category
-) { }
+) {}

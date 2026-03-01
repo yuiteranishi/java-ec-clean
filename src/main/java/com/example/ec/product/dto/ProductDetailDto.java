@@ -1,7 +1,6 @@
-package com.example.ec.product.web.dto;
+package com.example.ec.product.dto;
 
-// Viewに必要な形だけ（フォーマット済み価格などを持てる）
-public record ProductView(
+public record ProductDetailDto (
         Long id,
         String name,
         String priceText,
