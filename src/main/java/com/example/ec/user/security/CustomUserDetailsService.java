@@ -1,11 +1,8 @@
 package com.example.ec.user.security;
 
-import com.example.ec.user.repository.UserRepository;
+import com.example.ec.domain.user.UserRepository;
 import org.springframework.security.core.userdetails.*;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
   * Spring Security がログイン時に呼び出す「ユーザー読み出し」サービス

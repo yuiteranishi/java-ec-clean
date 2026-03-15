@@ -1,9 +1,9 @@
 package com.example.ec.product.application;
 
-import com.example.ec.category.domain.Category;
-import com.example.ec.category.repository.CategoryRepository;
-import com.example.ec.product.domain.Product;
-import com.example.ec.product.repository.ProductRepository;
+import com.example.ec.domain.category.Category;
+import com.example.ec.domain.category.CategoryRepository;
+import com.example.ec.domain.product.Product;
+import com.example.ec.domain.product.ProductRepository;
 import com.example.ec.product.dto.AdminProductForm;
 import com.example.ec.product.dto.AdminProductSummaryDto;
 import org.springframework.stereotype.Service;
@@ -15,14 +15,17 @@ import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+/**
+ * Repository(ビジネス用語のメソッドを定義) に依存
+ * */
 @Service
 @Transactional
-public class ProductAdminService implements AdminProductUseCase {
+public class AdminProductService implements AdminProductUseCase {
 
     private final ProductRepository productRepo;
     private final CategoryRepository categoryRepo;
 
-    public ProductAdminService (ProductRepository productRepo, CategoryRepository categoryRepo) {
+    public AdminProductService (ProductRepository productRepo, CategoryRepository categoryRepo) {
         this.productRepo = productRepo;
         this.categoryRepo = categoryRepo;
     }
@@ -98,7 +101,7 @@ public class ProductAdminService implements AdminProductUseCase {
     @Override
     @Transactional(readOnly = true)
     public List<Category> listVisibleCategories() {
-        return categoryRepo.findAllByIsVisibleTrueOrderBySortOrderAscNameAsc();
+        return categoryRepo.findAllVisible();
     }
 
     private void applyFormToEntity(AdminProductForm f, Product p) {

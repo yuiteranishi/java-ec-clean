@@ -1,6 +1,6 @@
 package com.example.ec.user.validation;
 
-import com.example.ec.user.repository.UserRepository;
+import com.example.ec.domain.user.UserRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.stereotype.Component;

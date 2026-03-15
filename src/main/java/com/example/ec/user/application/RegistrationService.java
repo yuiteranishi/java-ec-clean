@@ -1,8 +1,8 @@
 package com.example.ec.user.application;
 
-import com.example.ec.user.domain.User;
-import com.example.ec.user.domain.UserRole;
-import com.example.ec.user.repository.UserRepository;
+import com.example.ec.domain.user.User;
+import com.example.ec.domain.user.UserRole;
+import com.example.ec.domain.user.UserRepository;
 import com.example.ec.shared.mail.MailService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

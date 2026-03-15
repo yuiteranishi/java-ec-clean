@@ -1,6 +1,6 @@
 package com.example.ec.adapter.presenter;
 
-import com.example.ec.product.domain.Product;
+import com.example.ec.domain.product.Product;
 import com.example.ec.product.dto.ProductDetailDto;
 import org.springframework.stereotype.Component;
 

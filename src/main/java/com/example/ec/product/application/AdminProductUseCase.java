@@ -1,6 +1,6 @@
 package com.example.ec.product.application;
 
-import com.example.ec.category.domain.Category;
+import com.example.ec.domain.category.Category;
 import com.example.ec.product.dto.AdminProductForm;
 import com.example.ec.product.dto.AdminProductSummaryDto;
 

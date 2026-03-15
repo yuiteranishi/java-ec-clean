@@ -1,31 +1,43 @@
-package com.example.ec.user.domain;
+package com.example.ec.domain.user;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity @Table(name="users")
+/** ビジネスルールを持つ */
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, unique = true)
     private String email;
-
-    @Column(nullable = false)
     private String passwordHash;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable=false)
-    private UserRole role = UserRole.USER;
-
+    private UserRole role;
     private String displayName;
-    private Boolean enabled = true;
+    private Boolean enabled;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    @PrePersist void onCreate(){ createdAt = updatedAt = LocalDateTime.now(); }
-    @PreUpdate  void onUpdate(){ updatedAt = LocalDateTime.now(); }
+    public User()
+    {
+        this.role = UserRole.USER;
+        this.enabled = true;
+    }
 
+    public User(
+            Long id,
+            String email,
+            String passwordHash,
+            UserRole role,
+            String displayName,
+            Boolean enabled,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt
+    ) {
+        this.id = id;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.role = role;
+        this.displayName = displayName;
+        this.enabled = enabled;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
     public Long getId(){return id;} public void setId(Long id){this.id=id;}
     public String getEmail(){return email;} public void setEmail(String e){this.email=e;}
     public String getPasswordHash(){return passwordHash;} public void setPasswordHash(String h){this.passwordHash=h;}

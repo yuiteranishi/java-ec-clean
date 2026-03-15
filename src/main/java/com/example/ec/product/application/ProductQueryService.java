@@ -1,8 +1,9 @@
 package com.example.ec.product.application;
 
-import com.example.ec.category.repository.CategoryRepository;
 import com.example.ec.adapter.presenter.ProductPresenter;
-import com.example.ec.product.repository.ProductRepository;
+import com.example.ec.domain.category.Category;
+import com.example.ec.domain.category.CategoryRepository;
+import com.example.ec.domain.product.ProductRepository;
 import com.example.ec.product.dto.ProductDetailDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +31,7 @@ public class ProductQueryService implements ProductQueryUseCase {
     public List<ProductDetailDto> list(String categorySlug) {
         var products = (categorySlug == null || categorySlug.isBlank())
                 ? productRepo.findAll()
-                : productRepo.findAllByCategory_Slug(categorySlug);
+                : productRepo.findAllByCategorySlug(categorySlug);
         // 商品を1つずつ取り出して表示用に変換しリストにして返す
         return products.stream().map(presenter::toDto).toList();
     }
@@ -44,8 +45,8 @@ public class ProductQueryService implements ProductQueryUseCase {
     }
 
     @Override
-    public List<com.example.ec.category.domain.Category> listVisibleCategories() {
+    public List<Category> listVisibleCategories() {
         // 公開フラグがtrueのカテゴリを並び順と名前の昇順で返す
-        return categoryRepo.findAllByIsVisibleTrueOrderBySortOrderAscNameAsc();
+        return categoryRepo.findAllVisible();
     }
 }
