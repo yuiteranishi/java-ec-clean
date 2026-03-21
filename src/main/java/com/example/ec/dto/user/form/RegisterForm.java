@@ -1,4 +1,4 @@
-package com.example.ec.user.web.form;
+package com.example.ec.dto.user.form;
 
 import com.example.ec.user.validation.PasswordMatches;
 import com.example.ec.user.validation.UniqueEmail;

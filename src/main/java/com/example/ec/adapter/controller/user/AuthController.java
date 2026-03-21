@@ -1,7 +1,7 @@
-package com.example.ec.user.web;
+package com.example.ec.adapter.controller.user;
 
-import com.example.ec.user.application.RegistrationService;
-import com.example.ec.user.web.form.RegisterForm;
+import com.example.ec.application.user.RegistrationService;
+import com.example.ec.dto.user.form.RegisterForm;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

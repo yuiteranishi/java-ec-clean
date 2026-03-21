@@ -1,10 +1,10 @@
-package com.example.ec.product.application;
+package com.example.ec.application.product;
 
 import com.example.ec.adapter.presenter.ProductPresenter;
 import com.example.ec.domain.category.Category;
 import com.example.ec.domain.category.CategoryRepository;
 import com.example.ec.domain.product.ProductRepository;
-import com.example.ec.product.dto.ProductDetailDto;
+import com.example.ec.dto.product.ProductDetailDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;

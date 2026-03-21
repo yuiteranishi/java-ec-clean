@@ -1,7 +1,7 @@
 package com.example.ec.adapter.presenter;
 
 import com.example.ec.domain.product.Product;
-import com.example.ec.product.dto.ProductDetailDto;
+import com.example.ec.dto.product.ProductDetailDto;
 import org.springframework.stereotype.Component;
 
 import java.text.NumberFormat;

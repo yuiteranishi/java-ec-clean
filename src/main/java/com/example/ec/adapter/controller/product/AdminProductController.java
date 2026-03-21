@@ -1,7 +1,7 @@
-package com.example.ec.product.web;
+package com.example.ec.adapter.controller.product;
 
-import com.example.ec.product.application.AdminProductUseCase;
-import com.example.ec.product.dto.AdminProductForm;
+import com.example.ec.application.product.AdminProductUseCase;
+import com.example.ec.dto.product.from.AdminProductForm;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

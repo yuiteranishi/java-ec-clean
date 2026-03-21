@@ -1,6 +1,6 @@
-package com.example.ec.product.web;
+package com.example.ec.adapter.controller.product;
 
-import com.example.ec.product.application.ProductQueryUseCase;
+import com.example.ec.application.product.ProductQueryUseCase;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

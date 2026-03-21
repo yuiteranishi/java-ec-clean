@@ -1,4 +1,4 @@
-package com.example.ec.product.dto;
+package com.example.ec.dto.product;
 
 public record ProductDetailDto (
         Long id,

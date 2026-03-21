@@ -1,7 +1,7 @@
-package com.example.ec.product.application;
+package com.example.ec.application.product;
 
 import com.example.ec.domain.category.Category;
-import com.example.ec.product.dto.ProductDetailDto;
+import com.example.ec.dto.product.ProductDetailDto;
 
 import java.util.List;
 

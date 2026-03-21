@@ -1,4 +1,4 @@
-package com.example.ec.user.application;
+package com.example.ec.application.user;
 
 import com.example.ec.domain.user.User;
 import com.example.ec.domain.user.UserRole;

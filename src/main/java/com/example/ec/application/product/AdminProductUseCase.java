@@ -1,8 +1,8 @@
-package com.example.ec.product.application;
+package com.example.ec.application.product;
 
 import com.example.ec.domain.category.Category;
-import com.example.ec.product.dto.AdminProductForm;
-import com.example.ec.product.dto.AdminProductSummaryDto;
+import com.example.ec.dto.product.from.AdminProductForm;
+import com.example.ec.dto.product.AdminProductSummaryDto;
 
 import java.util.List;
 
