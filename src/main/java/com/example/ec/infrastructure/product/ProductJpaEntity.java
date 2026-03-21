@@ -19,31 +19,22 @@ public class ProductJpaEntity {
     private Long id;
 
     /** 商品名（必須） */
-    @NotBlank
-    @Size(max = 255)
     @Column(nullable = false)
     private String name;
 
     /** 価格（必須） */
-    @NotNull
-    @DecimalMin(value = "0.0", inclusive = false, message = "validation.price,positive")
-    @Digits(integer = 8, fraction = 2)
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
     /** 説明（任意） */
-    @Size(max = 1000)
     @Column(length = 1000)
     private String description;
 
     /** 画像（任意） */
-    @URL(message = "validation.url.invalid")
     @Column(length = 1024)
     private String imageUrl;
 
     /** 在庫数（必須） */
-    @NotNull
-    @PositiveOrZero
     @Column(nullable = false)
     private Integer stockQty = 0;
 
