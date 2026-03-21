@@ -4,7 +4,7 @@ import com.example.ec.domain.category.Category;
 import com.example.ec.domain.category.CategoryRepository;
 import com.example.ec.domain.product.Product;
 import com.example.ec.domain.product.ProductRepository;
-import com.example.ec.dto.product.from.AdminProductForm;
+import com.example.ec.dto.product.form.AdminProductForm;
 import com.example.ec.dto.product.AdminProductSummaryDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

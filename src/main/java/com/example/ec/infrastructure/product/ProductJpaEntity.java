@@ -4,8 +4,6 @@ import com.example.ec.domain.category.Category;
 import com.example.ec.domain.product.Product;
 import com.example.ec.infrastructure.category.CategoryJpaEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import org.hibernate.validator.constraints.URL;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

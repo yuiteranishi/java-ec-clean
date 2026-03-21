@@ -1,4 +1,4 @@
-package com.example.ec.dto.product.from;
+package com.example.ec.dto.product.form;
 
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.URL;
