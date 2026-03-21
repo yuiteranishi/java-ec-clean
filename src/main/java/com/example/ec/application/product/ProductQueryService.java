@@ -1,9 +1,9 @@
 package com.example.ec.application.product;
 
-import com.example.ec.adapter.presenter.ProductPresenter;
 import com.example.ec.domain.category.Category;
 import com.example.ec.domain.category.CategoryRepository;
 import com.example.ec.domain.product.ProductRepository;
+import com.example.ec.domain.product.port.ProductPresenterPort;
 import com.example.ec.dto.product.ProductDetailDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,12 +19,12 @@ public class ProductQueryService implements ProductQueryUseCase {
 
     private final ProductRepository productRepo;
     private final CategoryRepository categoryRepo;
-    private final ProductPresenter presenter;
+    private final ProductPresenterPort presenter;
 
-    public ProductQueryService(ProductRepository productRepo, CategoryRepository categoryRepo, ProductPresenter productPresenter) {
+    public ProductQueryService(ProductRepository productRepo, CategoryRepository categoryRepo, ProductPresenterPort presenter) {
         this.productRepo = productRepo;
         this.categoryRepo = categoryRepo;
-        this.presenter = productPresenter;
+        this.presenter = presenter;
     }
 
     @Override
