@@ -1,7 +1,7 @@
 package com.example.ec.adapter.presenter;
 
 import com.example.ec.domain.product.Product;
-import com.example.ec.domain.product.port.ProductPresenterPort;
+import com.example.ec.application.product.port.ProductPresenterPort;
 import com.example.ec.dto.product.ProductDetailDto;
 import org.springframework.stereotype.Component;
 
