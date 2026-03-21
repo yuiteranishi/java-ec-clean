@@ -3,7 +3,7 @@ package com.example.ec.user.application;
 import com.example.ec.domain.user.User;
 import com.example.ec.domain.user.UserRole;
 import com.example.ec.domain.user.UserRepository;
-import com.example.ec.shared.mail.MailService;
+import com.example.ec.domain.user.port.MailPort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class RegistrationService {
     private final UserRepository repo;
     private final PasswordEncoder pe;
-    private final MailService mail;
+    private final MailPort mail;
 
-    public RegistrationService(UserRepository repo, PasswordEncoder pe, MailService mail){
+    public RegistrationService(UserRepository repo, PasswordEncoder pe, MailPort mail){
         this.repo = repo;
         this.pe = pe;
         this.mail = mail;
