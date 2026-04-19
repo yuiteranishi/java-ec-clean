@@ -8,7 +8,7 @@ import java.util.List;
 public interface JpaProductRepository extends JpaRepository<ProductJpaEntity, Long>
 {
     /**
-     * ProductRepositoryImpl@findByCategorySlug から呼ばれる
+     * ProductRepositoryImpl@findAllByCategorySlug から呼ばれる
      */
     List<ProductJpaEntity> findAllByCategory_Slug(String slug);
 }

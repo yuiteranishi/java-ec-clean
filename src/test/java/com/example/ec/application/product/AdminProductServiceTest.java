@@ -31,7 +31,7 @@ public class AdminProductServiceTest {
     }
 
     @Test
-    @DisplayName("listAll:：商品一覧をDTOに変換して返す")
+    @DisplayName("listAll：商品一覧をDTOに変換して返す")
     void listAll_正常()
     {
         var category = new Category(1L, "food", "food", null, null, 0, true);
