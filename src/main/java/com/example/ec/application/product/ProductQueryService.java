@@ -3,15 +3,13 @@ package com.example.ec.application.product;
 import com.example.ec.domain.category.Category;
 import com.example.ec.domain.category.CategoryRepository;
 import com.example.ec.domain.product.ProductRepository;
+import com.example.ec.domain.product.exception.ProductNotFoundException;
 import com.example.ec.application.product.port.ProductPresenterPort;
 import com.example.ec.dto.product.ProductDetailDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 @Transactional(readOnly = true)
@@ -41,7 +39,7 @@ public class ProductQueryService implements ProductQueryUseCase {
         // IDに一致する商品を探し、取得できれば表示用に変換した値・取得できなければ404を返す
         return productRepo.findById(id)
                 .map(presenter::toDto)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Product not found: " + id));
+                .orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     @Override

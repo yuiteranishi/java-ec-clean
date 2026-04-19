@@ -4,16 +4,15 @@ import com.example.ec.domain.category.Category;
 import com.example.ec.domain.category.CategoryRepository;
 import com.example.ec.domain.product.Product;
 import com.example.ec.domain.product.ProductRepository;
+import com.example.ec.domain.product.exception.ProductNotFoundException;
+import com.example.ec.domain.product.exception.CategoryNotFoundException;
 import com.example.ec.dto.product.form.AdminProductForm;
 import com.example.ec.dto.product.AdminProductSummaryDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
-
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 /**
  * Repository(ビジネス用語のメソッドを定義) に依存
@@ -59,7 +58,7 @@ public class AdminProductService implements AdminProductUseCase {
     @Transactional(readOnly = true)
     public AdminProductForm loadForm(Long id) {
         var p = productRepo.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,"Product not found: " + id));
+                .orElseThrow(() -> new ProductNotFoundException(id));
 
         return new AdminProductForm(
                 p.getId(),
@@ -85,7 +84,7 @@ public class AdminProductService implements AdminProductUseCase {
     @Override
     public void update(Long id, AdminProductForm f) {
         var p = productRepo.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Product not found: " + id));
+                .orElseThrow(() -> new ProductNotFoundException(id));
         // 既存エンティティにフォームの値を上書き
         applyFormToEntity(f, p);
         productRepo.save(p);
@@ -94,7 +93,7 @@ public class AdminProductService implements AdminProductUseCase {
     @Override
     public void delete(Long id) {
         var p = productRepo.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Product not found: " + id));
+                .orElseThrow(() -> new ProductNotFoundException(id));
         productRepo.delete(p);
     }
 
@@ -116,7 +115,7 @@ public class AdminProductService implements AdminProductUseCase {
         } else {
             // 選択されたカテゴリー（ID）を取得しセット
             var cat = categoryRepo.findById(f.category())
-                    .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Category not found: " + f.category()));
+                    .orElseThrow(() -> new CategoryNotFoundException(f.category()));
             p.setCategory(cat);
         }
     }
