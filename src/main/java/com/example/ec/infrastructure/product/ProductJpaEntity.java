@@ -82,7 +82,7 @@ public class ProductJpaEntity {
      */
     public Product toDomain()
     {
-        Category domainCategory = category.toDomain();
+        Category domainCategory = (category != null) ? category.toDomain() : null;
         return new Product(
                 id,
                 name,
