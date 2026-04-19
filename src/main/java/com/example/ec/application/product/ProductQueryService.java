@@ -27,9 +27,10 @@ public class ProductQueryService implements ProductQueryUseCase {
 
     @Override
     public List<ProductDetailDto> list(String categorySlug) {
+        var normalizedSlug = (categorySlug == null) ? null : categorySlug.trim();
         var products = (categorySlug == null || categorySlug.isBlank())
                 ? productRepo.findAll()
-                : productRepo.findAllByCategorySlug(categorySlug);
+                : productRepo.findAllByCategorySlug(normalizedSlug);
         // 商品を1つずつ取り出して表示用に変換しリストにして返す
         return products.stream().map(presenter::toDto).toList();
     }
