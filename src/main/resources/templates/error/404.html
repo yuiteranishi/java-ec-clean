@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="ja"
+      th:with="pageTitle='404 - ページが見つかりません'">
+    <head>
+        <meta charset="UTF-8"/>
+        <title th:text="${pageTitle}">404 - ページが見つかりません</title>
+    </head>
+    <body th:replace="~{_layout/base :: layout(~{::section})}">
+        <section>
+            <h1 style="color:#c00">404 - ページが見つかりません</h1>
+            <p>お探しのページは存在しないか、削除された可能性があります。</p>
+            <p th:if="${message != null}"
+               style="color:#666;font-size:0.9em"
+               th:text="${message}">詳細メッセージ</p>
+            <p style="margin-top:24px">
+                <a th:href="@{/products}">商品一覧へ戻る</a>
+            </p>
+        </section>
+    </body>
+</html>
