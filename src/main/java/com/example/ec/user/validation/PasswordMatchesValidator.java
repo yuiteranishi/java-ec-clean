@@ -1,6 +1,6 @@
 package com.example.ec.user.validation;
 
-import com.example.ec.user.web.form.RegisterForm;
+import com.example.ec.dto.user.form.RegisterForm;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
