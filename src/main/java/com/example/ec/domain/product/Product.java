@@ -25,7 +25,7 @@ public class Product {
 
     public Product()
     {
-        this.stockQty = stockQty != null ? stockQty : 0;
+        this.stockQty = 0;
     }
 
     public Product(
@@ -44,7 +44,7 @@ public class Product {
         this.price = price;
         this.description = description;
         this.imageUrl = imageUrl;
-        this.stockQty = stockQty;
+        this.stockQty = stockQty != null ? stockQty : 0;
         this.category = category;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -55,7 +55,7 @@ public class Product {
     public BigDecimal getPrice(){return price;} public void setPrice(BigDecimal price){this.price=price;}
     public String getDescription(){return description;} public void setDescription(String d){this.description=d;}
     public String getImageUrl(){ return imageUrl; } public void setImageUrl(String imageUrl){ this.imageUrl = imageUrl; }
-    public Integer getStockQty(){return stockQty;} public void setStockQty(Integer s){this.stockQty = stockQty != null ? stockQty : 0;}
+    public Integer getStockQty(){return stockQty;} public void setStockQty(Integer s){this.stockQty = s != null ? s : 0;}
     public Category getCategory(){ return category;} public void setCategory(Category category){ this.category=category; }
     public LocalDateTime getCreatedAt(){return createdAt;} public LocalDateTime getUpdatedAt(){return updatedAt;}
 }

@@ -21,8 +21,8 @@ public class Category {
 
     public Category()
     {
-        this.sortOrder = sortOrder != null ? sortOrder : 0;
-        this.isVisible = Boolean.TRUE.equals(isVisible);
+        this.sortOrder = 0;
+        this.isVisible = false;
     }
 
     public Category (
@@ -39,8 +39,8 @@ public class Category {
         this.slug = slug;
         this.description = description;
         this.imageUrl = imageUrl;
-        this.sortOrder = sortOrder;
-        this.isVisible = isVisible;
+        this.sortOrder = sortOrder != null ? sortOrder : 0;
+        this.isVisible = Boolean.TRUE.equals(isVisible);
     }
     public Long getId(){return id;} public void setId(Long id){this.id=id;}
     public String getName(){return name;} public void setName(String name){this.name=name;}
