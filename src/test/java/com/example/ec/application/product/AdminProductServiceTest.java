@@ -4,11 +4,12 @@ import com.example.ec.domain.category.Category;
 import com.example.ec.domain.category.CategoryRepository;
 import com.example.ec.domain.product.Product;
 import com.example.ec.domain.product.ProductRepository;
+import com.example.ec.domain.product.exception.CategoryNotFoundException;
+import com.example.ec.domain.product.exception.ProductNotFoundException;
 import com.example.ec.dto.product.form.AdminProductForm;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -72,7 +73,7 @@ public class AdminProductServiceTest {
         when(categoryRepo.findById(999L)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> service.create(form))
-                .isInstanceOf(ResponseStatusException.class)
+                .isInstanceOf(CategoryNotFoundException.class)
                 .hasMessageContaining("Category not found");
 
         verify(productRepo, never()).save(any());
@@ -102,7 +103,7 @@ public class AdminProductServiceTest {
         when(productRepo.findById(999L)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> service.update(999L, form))
-                .isInstanceOf(ResponseStatusException.class)
+                .isInstanceOf(ProductNotFoundException.class)
                 .hasMessageContaining("Product not found");
     }
 
@@ -123,7 +124,7 @@ public class AdminProductServiceTest {
         when(productRepo.findById(999L)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> service.delete(999L))
-                .isInstanceOf(ResponseStatusException.class)
+                .isInstanceOf(ProductNotFoundException.class)
                 .hasMessageContaining("Product not found");
     }
 }

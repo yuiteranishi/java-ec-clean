@@ -5,11 +5,11 @@ import com.example.ec.domain.category.Category;
 import com.example.ec.domain.category.CategoryRepository;
 import com.example.ec.domain.product.Product;
 import com.example.ec.domain.product.ProductRepository;
+import com.example.ec.domain.product.exception.ProductNotFoundException;
 import com.example.ec.dto.product.ProductDetailDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -91,7 +91,7 @@ public class ProductQueryServiceTest {
         when(productRepo.findById(999L)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> service.getOr404(999L))
-                .isInstanceOf(ResponseStatusException.class)
+                .isInstanceOf(ProductNotFoundException.class)
                 .hasMessageContaining("Product not found");
     }
 
